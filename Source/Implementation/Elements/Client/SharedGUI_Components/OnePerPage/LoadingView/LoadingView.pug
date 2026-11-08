@@ -1,0 +1,26 @@
+mixin LoadingView(properties)
+
+  -
+
+    /** @type { LoadingViewStringResources } */
+    const $ownStringResources = IMPORTS_FROM_TYPESCRIPT.stringResources.GUI_Components.onePerPage.loadingView[$$LOCALE];
+
+    const {
+
+      /** @type { string } */
+      message = $ownStringResources.defaultMessage
+
+    } = properties ?? {};
+
+
+  .LoadingView&attributes(attributes)
+
+    +LoadingIndicator--YDF({
+      type: LoadingIndicator__YDF.Types.variableWidthArcSpinner
+    }).LoadingView-LoadingIndicator(
+      role="none"
+    )
+
+    p.LoadingView-ApplicationNameLabel Sample Application
+
+    p.LoadingView-Message= message

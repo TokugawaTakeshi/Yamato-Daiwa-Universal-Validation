@@ -1,0 +1,13 @@
+mixin Header
+
+  header.Header&attributes(attributes)
+
+    +DummyLogoLink--YDF({
+      iconTextContent: "ABC",
+      heading: "Sample Application",
+      subheading: "Let's get start"
+    }).Header-LogoLink
+
+    +LanguageDropDownList--YDF.Header-LanguageDropDownList
+
+    +HamburgerMenuButton--YDF.Header-HamburgerMenuButton

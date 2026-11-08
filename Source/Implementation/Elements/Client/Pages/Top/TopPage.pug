@@ -1,0 +1,201 @@
+extends ../../Layouts/OneColumn/OneColumnLayout.pug
+
+
+block append Requirements
+
+  include ../../SharedAssets/Markup/SharedAssets.pug
+  include ../../SharedGUI_Components/SharedGUI_Components.pug
+
+
+block append Data
+
+  -
+
+    /** @type { ReadonlyArray<Product> } */
+    const $products = IMPORTS_FROM_TYPESCRIPT.testData.products[$$LANGUAGE_TAG]
+
+    /** @type { TopPageStringResources } */
+    const $pageStringResources = IMPORTS_FROM_TYPESCRIPT.stringResources.pages.top[$$LOCALE];
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: $pageStringResources.metadata.title
+      },
+      stylesSheetsURIs: [
+        "@Shared/Primer",
+        "@ExternalSharedGUI_Components",
+        "@InternalSharedGUI_Components",
+        "@LayoutsForStaticPreview/OneColumn/OneColumnLayout",
+        "@ApplicationPagesForStaticPreview/Top/TopPage"
+      ]
+    });
+
+    OneColumnLayout.setSpecificContentSpecialCSS_Class("TopPage");
+
+
+block append StatesSimulations
+
+  -
+
+    /**
+     * @type {
+     *   Readonly<{
+     *     loading?: boolean;
+     *     error?: boolean;
+     *     noItems?: boolean;
+     *     noSearchResults?: boolean;
+     *     pagination: boolean;
+     *   }>
+     * }
+     * */
+    const $pageStatesSimulations = { ...$$topPageStatesSimulations, pagination: true }
+
+
+block append SpecificContent
+
+  h1.TopPage-VisuallyHiddenTopHeading= $pageStringResources.topHeading
+
+  //- ━━━ Action Bar ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  .TopPage-ActionBar(
+    role="search"
+  )
+
+    +DropDownList--YDF(
+      {
+        placeholder: $pageStringResources.controls.productsCategoriesDropDownList.placeholder,
+        accessibilityGuidances: {
+          inputElement: $pageStringResources.controls.productsCategoriesDropDownList.accessibilityGuidances.inputElement,
+          button: $pageStringResources.controls.productsCategoriesDropDownList.accessibilityGuidances.button,
+          listBox: $pageStringResources.controls.productsCategoriesDropDownList.accessibilityGuidances.listBox
+        },
+        selectingOptions: [],
+        disabled: __IS_STATIC_PREVIEW_BUILDING_MODE__YDA__ && $pageStatesSimulations.loading
+      },
+      { expanded: false }
+    ).TopPage-ActionBar-DropDownList
+
+    +SearchBox--YDF({
+      placeholder: $pageStringResources.controls.productsSearchBox.placeholder,
+      accessibilityGuidance: $pageStringResources.controls.productsSearchBox.accessibilityGuidance
+    }).TopPage-ActionBar-SearchingBox
+
+
+  //- ━━━ Products Categories Retrieving Failed Message ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  if $pageStatesSimulations.error
+
+    +AdmonitionBlock--YDF({
+      title: $pageStringResources.errors.productsCategoriesRetrievingFailed.title,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.error,
+      SVG_Icon: true
+    }).TopPage-AdmonitionBlock
+
+      p= $pageStringResources.errors.productsCategoriesRetrievingFailed.description
+
+      +Button--YDF({
+        label: $pageStringResources.controls.buttons.retryingOfProductsCategoriesRetrieving.label
+      }).AdmonitionBlock--YDF-CenteredButton
+
+
+  //- ━━━ Cards Flow / Messages ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  if $pageStatesSimulations.loading
+
+    .TopPage-GridFlow
+
+      .TopPage-GridFlow-VisuallyHiddenAccessibilityGuidance(
+        role="alert"
+      )= $pageStringResources.accessibilityGuidances.productsLoadingInProgress
+
+      each cardNumber in Array.from(new Array(12).keys())
+
+        .TopPage-Card(role="none")
+          .TopPage-Card-ProductTitle.TopPage-Card-ProductTitle__LoadingPlaceholder
+          .TopPage-Card-PriceLabel.TopPage-Card-PriceLabel__LoadingPlaceholder
+          .TopPage-Card-ImageSizingAndDecorativeContainer.TopPage-Card-ImageSizingAndDecorativeContainer__LoadingPlaceholder
+
+  else if $pageStatesSimulations.error
+
+    +AdmonitionBlock--YDF({
+      title: $pageStringResources.errors.productsRetrievingFailed.title,
+      SVG_Icon: true,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.error
+    }).TopPage-AdmonitionBlock
+
+      p= $pageStringResources.errors.productsRetrievingFailed.description
+
+      +Button--YDF({
+        label: $pageStringResources.controls.buttons.retryingOfProductsRetrieving.label
+      }).AdmonitionBlock--YDF-CenteredButton
+
+  else if $pageStatesSimulations.noItems
+
+    +AdmonitionBlock--YDF({
+      title: $pageStringResources.guidances.noItemsAvailable.title,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance,
+      SVG_Icon: true
+    }).TopPage-AdmonitionBlock= $pageStringResources.guidances.noItemsAvailable.description
+
+  else if $pageStatesSimulations.noSearchResults
+
+    +AdmonitionBlock--YDF({
+      title: $pageStringResources.guidances.noItemsFound.title,
+      decorativeVariation: AdmonitionBlock__YDF.DecorativeVariations.guidance,
+      SVG_Icon: true
+    }).TopPage-AdmonitionBlock
+
+      p= $pageStringResources.guidances.noItemsFound.description
+
+      +Button--YDF({
+        label: $pageStringResources.controls.buttons.resettingOfProductsFiltering.label
+      }).AdmonitionBlock--YDF-CenteredButton
+
+  else
+
+    ul.TopPage-GridFlow
+
+      each _product in $products
+
+        -
+          /** @type { Product } */
+          const product  = _product;
+
+        li.TopPage-Card
+
+          span.TopPage-Card-ProductTitle= product.localizedTitle
+
+          span.TopPage-Card-PriceLabel
+            span.TopPage-Card-PriceLabel-Amount
+              | #{ YDF.separateEach3_DigitsGroupWithComma(product.price__yens__includingConsumptionTax) }
+            span.TopPage-Card-PriceLabel-Currency ￥
+
+          -
+
+            /** @type { string } */
+            const imagePath =
+
+                [
+                  product.photoFileNameWithExtension.includes("DummyProduct") ?
+                      "$DummyImagesForStaticPreview" : "$SampleImagesForStaticPreview",
+                  "Product",
+                  "_Images",
+                  product.photoFileNameWithExtension
+                ].
+                    join("/");
+
+          .TopPage-Card-ImageSizingAndDecorativeContainer
+
+            img.TopPage-Card-Image(
+              src=imagePath
+              alt=product.localizedTitle
+            )
+
+    if $pageStatesSimulations.pagination
+
+      +Pagination--YDF({
+        maximalPageNumberButtonsCount: 10,
+        accessibilityGuidance: $pageStringResources.controls.productsPagination.accessibilityGuidance
+      }).TopPage-Pagination

@@ -1,0 +1,42 @@
+﻿top:
+
+  $heading: `top.$heading`
+  $URI: "/"
+
+
+accessControl:
+
+  $heading: `accessControl.$heading`
+
+  $children:
+
+    signingIn:
+
+      $heading: `accessControl.signingIn.$heading`
+      $URI: `@ApplicationPages/AccessControl/SigningIn/SigningInPage.${ fileNameLocalizationExtensions }`
+
+    passwordRecovery:
+
+      $heading: `accessControl.passwordRecovery.$heading`
+      $URI: `@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage.${ fileNameLocalizationExtensions }`
+
+
+adminPanel:
+
+  $heading: `adminPanel.$heading`
+
+  usersManagement:
+
+    $heading: `adminPanel.usersManagement.$heading`
+    $URI: "@ApplicationPages/UsersManagement/UsersManagementPage.pug"
+
+errors:
+
+  $heading: `errors.$heading`
+
+  $children:
+
+    notFound:
+
+      $heading: `errors.notFound.$heading`
+      $URI: "@ApplicationPages/Errors/NotFound/NotFoundPage.pug"

@@ -1,0 +1,33 @@
+fileNameLocalizationExtensions: "english"
+
+top:
+
+  $heading: "Top"
+
+accessControl:
+
+  $heading: "Access Control"
+
+  signingIn:
+
+    $heading: "Signing In"
+
+  passwordRecovery:
+
+    $heading: "Password Recovery"
+
+adminPanel:
+
+  $heading: "Admin Panel"
+
+  usersManagement:
+
+    $heading: "Users Management"
+
+errors:
+
+  $heading: "Errors"
+
+  notFound:
+
+    $heading: "Not Found"

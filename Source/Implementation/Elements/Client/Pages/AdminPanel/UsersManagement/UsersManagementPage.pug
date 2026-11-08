@@ -1,0 +1,57 @@
+extends ../../../Layouts/MainColumnAndSidebar/MainColumnAndSidebarLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.pug
+  include ../../../SharedGUI_Components/SharedGUI_Components.pug
+
+
+block append Metadata
+
+  -
+
+    /** @type { UsersManagementPageStringResources } */
+    const $pageStringResources = IMPORTS_FROM_TYPESCRIPT.stringResources.pages.usersManagement[$$LOCALE];
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: $pageStringResources.metadata.title
+      },
+      stylesSheetsURIs: [
+        "@Shared/Primer",
+        "@ExternalSharedGUI_Components",
+        "@InternalSharedGUI_Components",
+        "@LayoutsForStaticPreview/MainColumnAndSidebar/MainColumnAndSidebarLayout",
+        "@ApplicationPagesForStaticPreview/AdminPanel/UsersManagement/UsersManagementPage"
+      ]
+    });
+
+
+block append SpecificContent
+
+  h1= $pageStringResources.topHeading
+
+  if $$usersManagementPagePageStatesSimulations.loading
+
+    p= $pageStringResources.stateMessages.loading
+
+  else if $$usersManagementPagePageStatesSimulations.error
+
+    p= $pageStringResources.stateMessages.error
+
+  else if $$usersManagementPagePageStatesSimulations.noItems
+
+    p= $pageStringResources.stateMessages.noItems
+
+  else if $$usersManagementPagePageStatesSimulations.noSearchResults
+
+    p= $pageStringResources.stateMessages.noSearchResults
+
+  else
+
+    ul
+
+      each userNumber in Array.from(new Array(3).keys())
+
+        li= `${ $pageStringResources.labels.user } ${ userNumber }`

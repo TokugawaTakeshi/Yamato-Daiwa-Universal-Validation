@@ -1,0 +1,95 @@
+@require "../../SharedAssets/Styles/_Resources.styl"
+@require "_MainColumnAndSidebarLayout.resources.styl"
+
+
+.MainColumnAndSidebarLayout
+
+  HORIZONTAL_SPACE_BETWEEN_COLUMNS = 20px
+
+  fillBodyVertically--YDF({ verticalScrolling: true })
+
+  background-color: TemporarySemitransparentHighlighting--YDF.red.opacity10Percent
+
+
+  +MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+
+    display grid
+    grid-template-rows auto 1fr auto
+
+
+  +MainColumnAndSidebarLayout-WideScreensConfiguration()
+
+    //* 【 何これ？！ 】 グリッドを中央させる方法は特殊。 */
+    sideEmptyColumnsWith = "calc((100% - %s)/2)" % MainColumnAndSidebarLayout.MAXIMAL_CONTENT_WIDTH_WIHTOUT_PADDINGS
+
+    grid-template-columns:\
+        sideEmptyColumnsWith\
+        minmax(0, 1fr)\
+        MainColumnAndSidebarLayout.SIDEBAR_CONTENT_FIXED_OUTER_WIDTH\
+        sideEmptyColumnsWith
+
+
+  +MainColumnAndSidebarLayout-MediumScreensConfiguration()
+
+    grid-template-columns:\
+        MainColumnAndSidebarLayout.SIDE_SYMMETRIC_PADDINGS_ON_WIDE_AND_MEDIUM_SCREEENS\
+        minmax(0, 1fr)\
+        MainColumnAndSidebarLayout.SIDEBAR_CONTENT_FIXED_OUTER_WIDTH\
+        MainColumnAndSidebarLayout.SIDE_SYMMETRIC_PADDINGS_ON_WIDE_AND_MEDIUM_SCREEENS
+
+
+  +MainColumnAndSidebarLayout-NarrowScreensConfiguration()
+
+    display flex
+    flex-direction column
+
+
+  &-TopFixedContent
+
+    background-color: TemporarySemitransparentHighlighting--YDF.orange.opacity10Percent
+
+
+    +MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+
+      grid-column 1 / -1
+
+
+  &-MainColumn
+
+    background-color: TemporarySemitransparentHighlighting--YDF.yellow.opacity10Percent
+
+
+    +MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+
+      grid-column 2
+      margin-right HORIZONTAL_SPACE_BETWEEN_COLUMNS
+
+
+    +MainColumnAndSidebarLayout-NarrowScreensConfiguration()
+
+      flex-grow 1
+
+
+  &-Sidebar
+
+    background-color: TemporarySemitransparentHighlighting--YDF.green.opacity10Percent
+
+
+    +MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+
+      grid-column 3
+
+      position sticky
+      top 0
+
+
+    +MainColumnAndSidebarLayout-NarrowScreensConfiguration()
+
+      display none
+
+
+  &-BottomFixedContentSlot
+
+    +MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+
+      grid-column 1 / -1

@@ -1,0 +1,33 @@
+fileNameLocalizationExtensions: "japanese"
+
+top:
+
+  $heading: "トップ"
+
+accessControl:
+
+  $heading: "アクセス管理"
+
+  signingIn:
+
+    $heading: "サインイン"
+
+  passwordRecovery:
+
+    $heading: "パスワードリセット"
+
+adminPanel:
+
+  $heading: "管理画面"
+
+  usersManagement:
+
+    $heading: "ユーザー管理"
+
+errors:
+
+  $heading: "エラー"
+
+  notFound:
+
+    $heading: "見つかりませんでした"

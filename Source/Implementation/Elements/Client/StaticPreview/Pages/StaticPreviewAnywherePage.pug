@@ -1,0 +1,204 @@
+extends ../../../../../../node_modules/@yamato-daiwa/frontend/PagesTemplates/StaticPreviewAnywherePageTemplate.pug
+
+
+block append Requirements
+
+  include ../../../../../../node_modules/@yamato-daiwa/frontend-localization-japanese/StaticPreviewAnywherePageLocalization.pug
+
+
+block append Metadata
+
+  -
+
+    StaticPreviewAnywherePage__YDF.configure({
+
+      metadata: {
+        locale: "ja",
+        title: "サンプルアプリケーション開発"
+      },
+
+      topHeading: "サンプルアプリケーション開発",
+
+      localization: staticPreviewAnywherePageLocalization__japanese,
+
+      tableOfContents: [
+
+        {
+
+          title: "トップ",
+
+          linksTable: [
+
+            {
+              rowLabel: "標準",
+              columns: [
+                { label: "日本語", URI: "@ApplicationPages/Top/TopPage.japanese" },
+                { label: "English", URI: "@ApplicationPages/Top/TopPage.english" }
+              ]
+            },
+
+            {
+              rowLabel: "ロード中",
+              columns: [
+                { label: "日本語", URI: "@ApplicationPages/Top/TopPage__Loading.japanese" },
+                { label: "English", URI: "@ApplicationPages/Top/TopPage__Loading.english" }
+              ]
+            },
+
+            {
+              rowLabel: "不具合発生",
+              columns: [
+                { label: "日本語", URI: "@ApplicationPages/Top/TopPage__Error.japanese" },
+                { label: "English", URI: "@ApplicationPages/Top/TopPage__Error.english" }
+              ]
+            },
+
+            {
+              rowLabel: "項目無し",
+              columns: [
+                { label: "日本語", URI: "@ApplicationPages/Top/TopPage__NoItems.japanese" },
+                { label: "English", URI: "@ApplicationPages/Top/TopPage__NoItems.english" }
+              ]
+            },
+
+            {
+              rowLabel: "検索結果無し",
+              columns: [
+                { label: "日本語", URI: "@ApplicationPages/Top/TopPage__NoSearchResults.japanese" },
+                { label: "English", URI: "@ApplicationPages/Top/TopPage__NoSearchResults.english" }
+              ]
+            }
+
+          ],
+
+          progressStatus: StaticPreviewAnywherePage__YDF.PageDevelopmentProgressStatuses.implementationInProgress
+
+        },
+
+        {
+          title: "初期ロード",
+          linksList: [
+            { label: "日本語", URI: "@StaticPreviewPages/Loading/LoadingPage.japanese" },
+            { label: "English", URI: "@StaticPreviewPages/Loading/LoadingPage.english" }
+          ],
+          progressStatus: StaticPreviewAnywherePage__YDF.PageDevelopmentProgressStatuses.implementationInProgress
+        },
+
+        {
+
+          heading: "アクセス管理",
+
+          pages: [
+
+            {
+              title: "サインイン",
+              linksList: [
+                { label: "日本語", URI: "@ApplicationPages/AccessControl/SigningIn/SigningInPage.japanese" },
+                { label: "English", URI: "@ApplicationPages/AccessControl/SigningIn/SigningInPage.english" }
+              ],
+              progressStatus: StaticPreviewAnywherePage__YDF.PageDevelopmentProgressStatuses.implementationInProgress
+            },
+
+            {
+
+              title: "パスワード回復",
+              progressStatus: StaticPreviewAnywherePage__YDF.PageDevelopmentProgressStatuses.implementationInProgress,
+
+              linksTable: [
+
+                {
+                  rowLabel: "メールアドレス入力段階",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage__EmailInputtingStep.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage__EmailInputtingStep.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "復帰コード入力段階",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage__RecoveryCodeInputtingStep.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage__RecoveryCodeInputtingStep.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "新規パスワード入力段階",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AccessControl/PasswordRecovery/PasswordRecoveryPage.english" }
+                  ]
+                }
+
+              ]
+
+            }
+
+          ]
+
+        },
+
+        {
+
+          heading: "管理画面",
+
+          pages: [
+
+            {
+
+              title: "ユーザー管理",
+              progressStatus: StaticPreviewAnywherePage__YDF.PageDevelopmentProgressStatuses.implementationInProgress,
+
+              linksTable: [
+
+                {
+                  rowLabel: "標準",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "ロード中",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__Loading.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__Loading.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "不具合発生",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__Error.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__Error.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "項目無し",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__NoItems.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__NoItems.english" }
+                  ]
+                },
+
+                {
+                  rowLabel: "検索結果無し",
+                  columns: [
+                    { label: "日本語", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__NoSearchResults.japanese" },
+                    { label: "English", URI: "@ApplicationPages/AdminPanel/UsersManagement/UsersManagementPage__NoSearchResults.english" }
+                  ]
+                }
+
+              ]
+
+            }
+
+          ]
+
+        }
+
+      ]
+
+    });

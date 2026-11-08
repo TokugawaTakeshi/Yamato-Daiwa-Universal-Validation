@@ -1,0 +1,91 @@
+extends ../../../../../../node_modules/@yamato-daiwa/frontend/PagesTemplates/RegularWebPageTemplate.pug
+
+
+block append Requirements
+
+  -
+
+    class MainColumnAndSidebarLayout {
+
+      /* ━━━ Configuration ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+      /* ┅┅┅ Main Column ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+      /**
+       * @private
+       * @type { string | null }
+       * */
+      static mainColumnPageSpecificCSS_Class = null;
+
+      /**
+       * @public
+       * @param { string } mainColumnPageSpecificCSS_Class
+       * @returns { typeof MainColumnAndSidebarLayout }
+       * */
+      static setMainColumnPageSpecificCSS_Class(mainColumnPageSpecificCSS_Class) {
+        MainColumnAndSidebarLayout.mainColumnPageSpecificCSS_Class = mainColumnPageSpecificCSS_Class;
+        return MainColumnAndSidebarLayout;
+      }
+
+
+      /* ┅┅┅ Top Heading ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+      /**
+       * @private
+       * @type { string | null }
+       * */
+      static topHeading = null;
+
+      /**
+       * @public
+       * @param { string } topHeading
+       * @returns { typeof MainColumnAndSidebarLayout }
+       * */
+      static setTopHeading(topHeading) {
+        MainColumnAndSidebarLayout.topHeading = topHeading;
+        return MainColumnAndSidebarLayout;
+      }
+
+
+      /* ┅┅┅ Admin Bar ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+      /**
+       * @private
+       * @type { boolean }
+       * */
+      static mustDisplayAdminBarOnStaticPreviewMode = false;
+
+      /**
+       * @public
+       * @param { string } flag
+       * @returns { typeof MainColumnAndSidebarLayout }
+       * */
+      static displayAdminBarOnStaticPreviewModeIf(flag) {
+        MainColumnAndSidebarLayout.mustDisplayAdminBarOnStaticPreviewMode = flag;
+        return MainColumnAndSidebarLayout;
+      }
+
+    }
+
+
+block append PageContent
+
+  .MainColumnAndSidebarLayout(
+    id=IMPORTS_FROM_TYPESCRIPT.constants.LAYOUT_SCROLLABLE_CONTAINER_HTML_ID
+  )
+
+    .MainColumnAndSidebarLayout-TopFixedContent
+
+      +Header
+
+      block TopFixedContentSlot
+
+    main.MainColumnAndSidebarLayout-MainColumn(
+      class=MainColumnAndSidebarLayout.mainColumnPageSpecificCSS_Class
+    )
+
+      block SpecificContent
+
+    .MainColumnAndSidebarLayout-Sidebar
+
+    .MainColumnAndSidebarLayout-BottomFixedContentSlot
+
+      block BottomFixedContentSlot
+
+      +Footer

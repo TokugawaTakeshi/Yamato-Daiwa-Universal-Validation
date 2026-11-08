@@ -2,13 +2,33 @@
 
   "compilerOptions": {
 
-    "target": "ESNext",
+    "target": "ES2023",
+    "module": "preserve",
+    "moduleResolution": "bundler",
 
-    "types": [ "node" ],
-
-    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "noImplicitReturns": true
+    "noUnusedParameters": false, /* Vue 3専用、https://github.com/vuejs/vue-next/issues/4668 を参照*/
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "skipLibCheck": true,
+
+    "paths": {
+      "@CommonSolution/*": [ "./01-Source/CommonSolution/*" ],
+      "@Entities/*": [ "./01-Source/CommonSolution/Entities/*" ],
+      "@Gateways/*": [ "./01-Source/CommonSolution/Gateways/*" ],
+      "@Automation/*": [ "./01-Source/Automation/*" ],
+      "@Client/*": [ "./01-Source/Implementation/Elements/Client/*" ],
+      "@MainDatabase/*": [ "./01-Source/Implementation/Elements/MainDatabase/*" ],
+      "@KeyValueDatabase/*": [ "./01-Source/Implementation/Elements/KeyValueDatabase/*" ],
+      "@FrontServer/*": [ "./01-Source/Implementation/Elements/FrontServer/*" ],
+      "@MockDataSource/*": [ "./01-Source/Implementation/Elements/MockDataSource/*" ],
+      "@Interactions/*": [ "./01-Source/Implementation/Interactions/*" ],
+      "@Shared/*" : [ "./01-Source/Implementation/Shared/*" ],
+      "@Incubators/*": [ "./01-Source/Incubators/*" ]
+    }
 
   }
 

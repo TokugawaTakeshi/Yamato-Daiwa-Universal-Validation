@@ -1,0 +1,37 @@
+@require "../../SharedAssets/Styles/_Resources.styl"
+
+
+.OneColumnLayout
+
+  display flex
+  flex-direction column
+
+  fillBodyVertically--YDF({ verticalScrolling: false })
+
+  background-color: TemporarySemitransparentHighlighting--YDF.red.opacity10Percent
+
+
+  &-TopFixedContent
+
+    flex-shrink 0
+
+    background-color: TemporarySemitransparentHighlighting--YDF.orange.opacity10Percent
+
+
+  &-SpecificContent
+
+    display flex
+    flex-direction column
+
+    overflow-y auto
+
+    flex-grow 1
+
+    background-color: TemporarySemitransparentHighlighting--YDF.yellow.opacity10Percent
+
+
+  &-BottomFixedContentSlot
+
+    flex-shrink 0
+
+    background-color: TemporarySemitransparentHighlighting--YDF.green.opacity10Percent

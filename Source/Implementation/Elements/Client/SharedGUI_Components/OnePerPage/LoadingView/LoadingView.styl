@@ -1,0 +1,42 @@
+.LoadingView
+
+  &-LoadingIndicator
+
+    LoadingIndicator--YDF-customize(
+      (
+        LoadingIndicator--YDF.Types.variableWidthArcSpinner\
+        {
+          geometry: {
+            diameter: 10rem,
+            thickness: 0.8em
+          },
+          decoration: {
+            color: gray
+          }
+        }
+      )
+    )
+
+    margin-inline auto
+
+
+  &-ApplicationNameLabel
+
+    font-size 20px
+    text-align center
+
+    font-weight bold
+    color: W3C_39_ShadesOfGray--YDF[12]
+
+    margin-top 16px
+
+
+  &-Message
+
+    font-size 16px
+    text-align center
+
+    font-weight bold
+    color: W3C_39_ShadesOfGray--YDF[16]
+
+    margin-top 10px

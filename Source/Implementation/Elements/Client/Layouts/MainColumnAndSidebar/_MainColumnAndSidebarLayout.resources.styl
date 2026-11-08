@@ -1,0 +1,42 @@
+MainColumnAndSidebarLayout = createObjectWithComputedProperties--YDF(
+
+  {
+    MAXIMAL_CONTENT_WIDTH_WIHTOUT_PADDINGS: 3*NARROWEST_SCREEN_WIDTH_UNIT--YDF,
+    SIDE_SYMMETRIC_PADDINGS_ON_WIDE_AND_MEDIUM_SCREEENS: 20px,
+    MEDIUM_SCREENS_CONFIGURATION_MINIMAL_WIDTH: 760px,
+    SIDEBAR_CONTENT_FIXED_OUTER_WIDTH: 270px
+  },
+
+  @(targetObjectWithInitialFields) {
+
+    targetObjectWithInitialFields.wideScreensConfigurationMinimalWidth =\
+        targetObjectWithInitialFields.MAXIMAL_CONTENT_WIDTH_WIHTOUT_PADDINGS +\
+        2*targetObjectWithInitialFields.SIDE_SYMMETRIC_PADDINGS_ON_WIDE_AND_MEDIUM_SCREEENS
+
+  }
+
+)
+
+
+MainColumnAndSidebarLayout-WideScreensConfiguration()
+  @media (min-width: MainColumnAndSidebarLayout.wideScreensConfigurationMinimalWidth)
+    {block}
+
+MainColumnAndSidebarLayout-MediumScreensConfiguration()
+  @media\
+      (min-width: MainColumnAndSidebarLayout.MEDIUM_SCREENS_CONFIGURATION_MINIMAL_WIDTH) and\
+      (max-width: MainColumnAndSidebarLayout.wideScreensConfigurationMinimalWidth - 1)
+
+    {block}
+
+MainColumnAndSidebarLayout-NarrowScreensConfiguration()
+  @media (max-width: MainColumnAndSidebarLayout.MEDIUM_SCREENS_CONFIGURATION_MINIMAL_WIDTH - 1)
+    {block}
+
+MainColumnAndSidebarLayout-WideAndMediumScreensConfiguration()
+  @media (min-width: MainColumnAndSidebarLayout.MEDIUM_SCREENS_CONFIGURATION_MINIMAL_WIDTH)
+    {block}
+
+MainColumnAndSidebarLayout-MediumAndNarrowScreensConfiguration()
+  @media (max-width: MainColumnAndSidebarLayout.wideScreensConfigurationMinimalWidth - 1)
+    {block}

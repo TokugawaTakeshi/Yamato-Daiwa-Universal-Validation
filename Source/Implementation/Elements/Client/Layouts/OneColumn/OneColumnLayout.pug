@@ -1,0 +1,55 @@
+extends ../../../../../../node_modules/@yamato-daiwa/frontend/PagesTemplates/RegularWebPageTemplate.pug
+
+
+block append Requirements
+
+  -
+
+    class OneColumnLayout {
+
+      /* ━━━ Configuration ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+      /* ┅┅┅ Main Column ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ */
+
+      /**
+       * @private
+       * @type { string | null }
+       * */
+      static specificContentSpecialCSS_Class = null;
+
+      /**
+       * @public
+       * @param { string } specificContentSpecialCSS_Class
+       * @returns { typeof OneColumnLayout }
+       * */
+      static setSpecificContentSpecialCSS_Class(specificContentSpecialCSS_Class) {
+        OneColumnLayout.specificContentSpecialCSS_Class = specificContentSpecialCSS_Class;
+        return OneColumnLayout;
+      }
+
+    }
+
+
+block append PageContent
+
+  .OneColumnLayout
+
+    .OneColumnLayout-TopFixedContent
+
+      +Header
+
+      //- TODO 有ればナビゲーションリボンや通知バーを追加
+
+      block TopFixedContent
+
+    main.OneColumnLayout-SpecificContent(
+      class=OneColumnLayout.specificContentSpecialCSS_Class
+      id=IMPORTS_FROM_TYPESCRIPT.constants.LAYOUT_SCROLLABLE_CONTAINER_HTML_ID
+    )
+
+      block SpecificContent
+
+    .OneColumnLayout-BottomFixedContentSlot
+
+      block BottomFixedContent
+
+      +Footer

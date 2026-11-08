@@ -1,0 +1,30 @@
+extends ../../../../node_modules/@yamato-daiwa/frontend/PagesTemplates/RegularWebPageTemplate.pug
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: "新規SPAアプリケーション",
+        description: "共通詳細",
+        locale: "ja",
+        author: "株式会社やまとダイワ"
+      },
+      stylesSheetsURIs: [
+        "@Shared/Primer",
+        "@ExternalSharedGUI_Components",
+        "@InternalSharedGUI_Components"
+      ],
+      scriptsURIs: {
+        atEndOfBody: [
+          "@ClientEntryPoint"
+        ]
+      }
+    });
+
+
+block append PageContent
+
+  #APPLICATION

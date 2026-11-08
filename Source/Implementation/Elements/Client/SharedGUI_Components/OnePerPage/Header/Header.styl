@@ -1,0 +1,57 @@
+.Header
+
+  WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH = 500px
+
+  WideScreensConfiguration()
+    @media (min-width: WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH)
+      {block}
+
+  NarrowScreensConfiguration()
+    @media (max-width: WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH - 1)
+      {block}
+
+
+  padding 6px
+
+  background-color: W3C_39_ShadesOfGray--YDF[16]
+
+
+  +WideScreensConfiguration()
+
+    display flex
+    justify-content space-between
+    align-items center
+
+
+  +NarrowScreensConfiguration()
+
+    display grid
+    grid-template-areas\
+        "LOGO_LINK HAMBURGER_MENU_BUTTON"\
+        "LANGUAGE_DROPDOWN LANGUAGE_DROPDOWN"
+    grid-template-columns minmax(0, 1fr) auto
+
+    column-gap 12px
+    row-gap 6px
+
+
+  &-LogoLink
+
+    grid-area LOGO_LINK
+
+
+  &-LanguageDropDownList
+
+    grid-area LANGUAGE_DROPDOWN
+
+
+    +WideScreensConfiguration()
+
+      margin-left auto
+
+
+  &-HamburgerMenuButton
+
+    grid-area HAMBURGER_MENU_BUTTON
+
+    flex-shrink 0

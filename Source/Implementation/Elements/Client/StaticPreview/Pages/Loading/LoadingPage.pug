@@ -1,0 +1,43 @@
+extends ../../../Layouts/OneColumn/OneColumnLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.pug
+  include ../../../SharedGUI_Components/SharedGUI_Components.pug
+
+
+block append Data
+
+  -
+
+    /** @type { ReadonlyArray<Product> } */
+    const $products = IMPORTS_FROM_TYPESCRIPT.testData.products[$$LANGUAGE_TAG]
+
+    /** @type { LoadingPageStringResources } */
+    const $pageStringResources = IMPORTS_FROM_TYPESCRIPT.stringResources.pages.staticPreview.loading[$$LOCALE];
+
+
+block append Metadata
+
+  -
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: $pageStringResources.metadata.title
+      },
+      stylesSheetsURIs: [
+        "@Shared/Primer",
+        "@ExternalSharedGUI_Components",
+        "@InternalSharedGUI_Components",
+        "@LayoutsForStaticPreview/OneColumn/OneColumnLayout",
+        "@StaticPreviewPages/Loading/LoadingPage"
+      ]
+    });
+
+    OneColumnLayout.setSpecificContentSpecialCSS_Class("LoadingPage");
+
+
+block append SpecificContent
+
+  +LoadingView.LoadingPage-LoadingView

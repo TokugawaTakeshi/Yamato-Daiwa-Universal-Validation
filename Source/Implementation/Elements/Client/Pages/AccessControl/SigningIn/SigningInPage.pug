@@ -1,0 +1,56 @@
+extends ../../../Layouts/AccessControl/AccessControlLayout.pug
+
+
+block append Requirements
+
+  include ../../../SharedAssets/Markup/SharedAssets.pug
+  include ../../../SharedGUI_Components/SharedGUI_Components.pug
+
+
+block append Metadata
+
+  -
+
+    /** @type { SigningInPageStringResources }  */
+    const $pageStringResources = IMPORTS_FROM_TYPESCRIPT.stringResources.pages.accessControl.signingIn[$$LOCALE];
+
+    RegularWebPageTemplate__YDF.configure({
+      metadata: {
+        title: $pageStringResources.pageTitle
+      },
+      stylesSheetsURIs: [
+        "@Shared/Primer",
+        "@ExternalSharedGUI_Components",
+        "@InternalSharedGUI_Components",
+        "@LayoutsForStaticPreview/AccessControl/AccessControlLayout",
+        "@ApplicationPagesForStaticPreview/AccessControl/SigningIn/SigningInPage"
+      ]
+    });
+
+
+block append SpecificContent
+
+  h1.AccessControlLayout-TopHeading= $pageStringResources.topHeading
+
+  +TextBox--YDF({
+    label: $pageStringResources.inputs.emailAddress.label,
+    HTML_Type: TextBox__YDF.HTML_Types.email,
+    autocomplete: "email"
+  }).AccessControlLayout-TextBox
+
+  +TextBox--YDF({
+    label: $pageStringResources.inputs.password.label,
+    HTML_Type: TextBox__YDF.HTML_Types.password,
+    autocomplete: "current-password"
+  }).AccessControlLayout-TextBox
+
+  .AccessControlLayout-BottomActionBar
+
+    +Link--YDF({
+      internalURI: $$routing[$$LOCALE].accessControl.$children.passwordRecovery.$URI
+    })= $pageStringResources.links.passwordRecovery.label
+
+    +Button--YDF({
+      label: $pageStringResources.buttons.signingIn.label,
+      HTML_Type: Button__YDF.HTML_Types.submit
+    })

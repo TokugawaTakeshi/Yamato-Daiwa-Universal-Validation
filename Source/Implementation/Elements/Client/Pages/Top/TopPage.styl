@@ -1,0 +1,209 @@
+@require "../../SharedAssets/Styles/_Resources.styl"
+
+
+.TopPage
+
+  CARD_SHADOW_THICKNESS = 2px
+
+
+  CenteredContentWithDynamicInlinePaddings--YDF({
+    maximalContentWidth: 3*NARROWEST_SCREEN_WIDTH_UNIT--YDF,
+    minimalInlinePaddings: 3%
+  })
+
+  padding-top 12px
+
+  position relative
+
+
+  &-VisuallyHiddenTopHeading
+
+    VisuallyHidden--YDF()
+
+
+  &-ActionBar
+
+    WIDE_VIEWPORTS_PHASE_MINIMAL_WIDTH__PIXELS = 680px
+
+    WideViewportsPhase()
+      @media (min-width: WIDE_VIEWPORTS_PHASE_MINIMAL_WIDTH__PIXELS)
+        {block}
+
+    NarrowViewportsPhase()
+      @media (max-width: WIDE_VIEWPORTS_PHASE_MINIMAL_WIDTH__PIXELS - 1)
+        {block}
+
+
+    +WideViewportsPhase()
+
+      display flex
+      justify-content space-between
+      column-gap 6px
+
+      margin-top 6px
+
+
+    +NarrowViewportsPhase()
+
+      margin-top 8px
+
+
+    &-DropDownList
+
+      +WideViewportsPhase()
+
+        flex-shrink 0
+
+
+      +NarrowViewportsPhase()
+
+        max-width NARROWEST_SCREEN_WIDTH_UNIT--YDF
+
+
+    &-SearchingBox
+
+      +WideViewportsPhase()
+
+        max-width 400px
+        flex 1 0 auto
+
+
+      +NarrowViewportsPhase()
+
+        margin-top 6px
+
+
+  &-AdmonitionBlock
+
+    retireFrom--YDF({ targetElementSelector: ".TopPage-ActionBar", y: 8px })
+    retireFromElementWithSameSelector--YDF({ y: 24px })
+
+
+  &-GridFlow
+
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(250px, 1fr));
+    gap 10px
+
+    margin-top 12px
+    position relative
+
+    provideClippedShadowsAndOutlinesVisibility--YDF({
+      requiredHorizontalSymmetricSpace: CARD_SHADOW_THICKNESS,
+      requiredSpaceAtBottom: CARD_SHADOW_THICKNESS,
+      useBeforePseudoElementWithCompensatingNegativeTopMargins: true
+    })
+
+
+    whenItGoingLast--YDF({ verticalSpaceBelow: 48px })
+
+
+    &-VisuallyHiddenAccessibilityGuidance
+
+      VisuallyHidden--YDF()
+
+
+  &-Card
+
+    HORIZONTAL_SYMMETRIC_PADDINGS = 8px
+
+    display flex
+    flex-direction column
+
+    border-radius 8px
+    padding-inline HORIZONTAL_SYMMETRIC_PADDINGS
+    padding-bottom 6px
+    overflow hidden
+
+    background-color white
+    box-shadow 0 0 4px CARD_SHADOW_THICKNESS alpha(black, 0.25)
+
+
+    &-ProductTitle
+
+      font-size 20px
+      line-height 1.2
+      word-break break-all
+
+      font-weight bold
+      color: W3C_39_ShadesOfGray--YDF[8]
+
+      order 2
+      margin-top 8px
+
+
+      &__LoadingPlaceholder
+
+        LoadingPlaceholder({
+          width: 70%,
+          height: 1em
+        })
+
+
+    &-PriceLabel
+
+      font-weight bold
+
+      order 3
+      margin-top 4px
+
+
+      &__LoadingPlaceholder
+
+        LoadingPlaceholder({
+          width: 30%,
+          height: 1em
+        })
+
+
+      &-Amount
+
+        font-size 20px
+
+        color: W3C_39_ShadesOfGray--YDF[12]
+
+
+      &-Currency
+
+        font-size 13px
+        color: W3C_39_ShadesOfGray--YDF[8]
+
+        margin-left 1px
+
+
+    &-ImageSizingAndDecorativeContainer
+
+      aspect-ratio 3/2
+      overflow hidden
+
+      background-image:
+        radial-gradient(circle at top left,     gray,    transparent 70%),
+        radial-gradient(circle at top right,    darkgray,   transparent 70%),
+        radial-gradient(circle at bottom left,  lightgray,  transparent 70%),
+        radial-gradient(circle at bottom right, lightslategray, transparent 70%);
+
+      order 1
+      margin-inline -(HORIZONTAL_SYMMETRIC_PADDINGS)
+
+
+      &__LoadingPlaceholder
+
+        LoadingPlaceholder()
+
+
+    &-Image
+
+      display block
+      height 100%
+
+      margin-inline auto
+
+
+  &-Pagination
+
+    margin-top 16px
+    margin-bottom 36px
+
+    centerHorizontallyWithoutWrapper--YDF({
+      targetElementType: HorizontalCenteringWithoutWrapper--YDF.TargetElementTypes.block
+    })

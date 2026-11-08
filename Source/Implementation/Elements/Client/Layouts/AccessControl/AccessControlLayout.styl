@@ -1,0 +1,101 @@
+@require "../../SharedAssets/Styles/_Resources.styl"
+
+
+.AccessControlLayout
+
+  WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH = 420px
+
+  WideScreensConfiguration()
+    @media (min-width: WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH)
+      {block}
+
+  NarrowScreensConfiguration()
+    @media (max-width: WIDE_SCREENS_CONFIGURATION_MINIMAL_WIDTH - 1)
+      {block}
+
+
+  display flex
+  flex-direction column
+  justify-content center
+
+  height 100%
+
+
+  +WideScreensConfiguration()
+
+    align-items center
+
+    padding 24px 36px
+
+    background-color: W3C_39_ShadesOfGray--YDF[37]
+
+
+  +NarrowScreensConfiguration()
+
+    align-items stretch
+
+    Paddings--YDF({ horizontalSymmetric: 16px })
+
+    background-color white
+
+
+  &-Form
+
+    position relative //* 【 何故？ 】 JavaScriptで座標取得のに必要 */
+
+
+    +WideScreensConfiguration()
+
+      min-width NARROWEST_SCREEN_WIDTH_UNIT--YDF
+      max-width 1.5*NARROWEST_SCREEN_WIDTH_UNIT--YDF
+      width 100%
+
+      border-radius 4px
+      padding 12px 14px
+      overflow-y auto
+
+      background-color white
+      box-shadow 0 0 4px 2px alpha(black, 0.25)
+
+
+    +NarrowScreensConfiguration()
+
+      Paddings--YDF({ verticalSymmetric: 24px })
+
+
+  &-TopHeading
+
+    applyTextGeometryWithoutExtraSpaceCausedByLineHeight--YDF({ fontSize: 24px, lineSpacing: 0.2 })
+
+    color: W3C_39_ShadesOfGray--YDF[20]
+
+
+  &-TextBox
+
+    retireFrom--YDF({ targetElementSelector: ".AccessControlLayout-TopHeading", y: 16px })
+    retireFromElementWithSameSelector--YDF({ y: 12px })
+
+
+  &-AdmonitionBlock
+
+    PositionalRelationship--YDF({
+      definitions:\
+          (".AccessControlLayout-TopHeading" { retireFromIt: { y: 12px } })\
+          (".AccessControlLayout-TextBox" { pushItFromSelf: { y: 16px } })\
+          (".AccessControlLayout-AdmonitionBlock" { retireFromIt: { y: 6px } })
+    })
+
+
+  &-SubmittingButton
+
+    placeToRight--YDF()
+    retireFrom--YDF({ targetElementSelector: ".AccessControlLayout-TextBox", y: 8px })
+
+
+  &-BottomActionBar
+
+    display flex
+    justify-content space-between
+    align-items baseline
+
+    margin-top 12px
